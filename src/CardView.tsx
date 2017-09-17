@@ -70,7 +70,7 @@ export class CardView extends Component<Props, {}> {
     }
 
     const overlayStyle: ViewStyle = {
-      backgroundColor: '#000',
+      backgroundColor: this.overlayColor(),
       borderRadius: Settings.instance.borderRadius,
       height: Settings.instance.cardSize.height,
       opacity: this.overlayOpacity(),
@@ -119,16 +119,28 @@ export class CardView extends Component<Props, {}> {
     }
   }
 
+  private overlayColor(): string {
+    if (this.props.draggable) {
+      return '#fff'
+    }
+
+    if (this.props.correctlyPlaced) {
+      return '#000'
+    }
+
+    return 'transparent'
+  }
+
   private overlayOpacity(): number {
     if (this.props.draggable) {
-      return 0
+      return 0.5
     }
 
     if (this.props.correctlyPlaced) {
       return 0.5
     }
 
-    return 0.3
+    return 0
   }
 
   private suitColor(): string {

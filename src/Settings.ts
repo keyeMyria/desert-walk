@@ -13,7 +13,7 @@ export class Settings {
 
   public readonly colors = {
     card: {
-      background: '#fff',
+      background: '#bbb',
       border: '#000',
       clubs: '#000',
       diamonds: '#f00',
