@@ -9,6 +9,9 @@
   "private": false,
   "license": "MIT",
   "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "prettier": "prettier --write --print-width 100 --tab-width 2 --no-semi \"**/*.tsx\" \"**/*.ts\""
+  },
   "jest": {
     "preset": "jest-expo-ts"
   },
@@ -25,6 +28,7 @@
     "@types/fbemitter": "2.0.32",
     "@types/react": "16.0.5",
     "@types/react-native": "0.48.6",
+    "prettier": "1.7.0",
     "prop-types": "15.5.10",
     "react-native-typescript-transformer": "1.1.4",
     "tslint": "5.7.0",
