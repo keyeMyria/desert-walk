@@ -69,10 +69,8 @@ export default class App extends Component<{}, AppState> {
 
     return (
       <View style={mainViewStyle}>
-        <StatusBar hidden={true}/>
-        <Text style={headerStyle}>
-          Desert Walk
-        </Text>
+        <StatusBar hidden={true} />
+        <Text style={headerStyle}>Desert Walk</Text>
         <View style={gridWrapperViewStyle}>
           <Image
             source={require('./50713-transparent.png')}
@@ -84,7 +82,7 @@ export default class App extends Component<{}, AppState> {
               width: this.state.windowSize.width
             }}
           />
-          <GridView grid={this.grid}/>
+          <GridView grid={this.grid} />
         </View>
         <Footer
           correctlyPlacedCards={this.grid.correctlyPlacedCards}

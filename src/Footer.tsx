@@ -47,9 +47,12 @@ export class Footer extends Component<Props, State> {
       fontWeight: '700'
     }
 
-    const rightAlignedTextStyle: TextStyle = { ...textStyle, ...{
-      textAlign: 'right'
-    }}
+    const rightAlignedTextStyle: TextStyle = {
+      ...textStyle,
+      ...{
+        textAlign: 'right'
+      }
+    }
 
     return (
       <View
@@ -65,12 +68,8 @@ export class Footer extends Component<Props, State> {
             marginRight: 10
           }}
         >
-          <Text style={textStyle}>
-            Moves: {this.props.moves}
-          </Text>
-          <Text style={textStyle}>
-            Shuffles: {this.props.shuffles}
-          </Text>
+          <Text style={textStyle}>Moves: {this.props.moves}</Text>
+          <Text style={textStyle}>Shuffles: {this.props.shuffles}</Text>
           <Text style={rightAlignedTextStyle}>
             Cards in correct spot: {this.props.correctlyPlacedCards}
           </Text>
@@ -115,10 +114,7 @@ export class Footer extends Component<Props, State> {
             <Text style={questionStyle}>
               Are you sure you want to start over?
             </Text>
-            <Button
-              onPress={() => this.startOver()}
-              title="Yes, start over"
-            />
+            <Button onPress={() => this.startOver()} title="Yes, start over" />
             <Button
               onPress={() => this.hideConfirmModal()}
               title="No, let me continue this game"

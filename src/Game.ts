@@ -30,13 +30,18 @@ export class Game {
 
   @computed
   public get correctlyPlacedCards(): number {
-    const numberOfCorrectlyPlacedCards = this.cells.filter(cell => cell.cardIsCorrectlyPlaced).length
+    const numberOfCorrectlyPlacedCards = this.cells.filter(
+      cell => cell.cardIsCorrectlyPlaced
+    ).length
     return numberOfCorrectlyPlacedCards
   }
 
   /** Cells that are empty or have a card in the wrong place. */
-  @computed get cellsWithIncorrectlyPlacedCards(): Array<Cell> {
-    const cellsWithIncorrectlyPlacedCards = this.cells.filter(cell => !cell.cardIsCorrectlyPlaced)
+  @computed
+  get cellsWithIncorrectlyPlacedCards(): Array<Cell> {
+    const cellsWithIncorrectlyPlacedCards = this.cells.filter(
+      cell => !cell.cardIsCorrectlyPlaced
+    )
     return cellsWithIncorrectlyPlacedCards
   }
 
@@ -44,7 +49,10 @@ export class Game {
   public get draggableCards(): Array<Card> {
     let draggableCards = this.emptyCells
       .map(cell => cell.cellToTheLeft)
-      .filter(cellToTheLeft => cellToTheLeft !== undefined && cellToTheLeft.card !== undefined)
+      .filter(
+        cellToTheLeft =>
+          cellToTheLeft !== undefined && cellToTheLeft.card !== undefined
+      )
       .map(cell => ((cell as Cell).card as Card).next)
       .filter(nextCard => nextCard !== undefined) as Array<Card>
 
@@ -96,9 +104,9 @@ export class Game {
       return false
     }
 
-    const isNextCard
-      = card.suit === cell.cellToTheLeft.card.suit
-      && card.value === cell.cellToTheLeft.card.value + 1
+    const isNextCard =
+      card.suit === cell.cellToTheLeft.card.suit &&
+      card.value === cell.cellToTheLeft.card.value + 1
 
     return isNextCard
   }
@@ -131,12 +139,15 @@ export class Game {
     const theFourAces = this.deck.filter(card => card.value === 1)
 
     for (let rowIndex = 0; rowIndex < Settings.instance.rows; rowIndex++) {
-      for (let columnIndex = 0; columnIndex < Settings.instance.columns; columnIndex++) {
+      for (
+        let columnIndex = 0;
+        columnIndex < Settings.instance.columns;
+        columnIndex++
+      ) {
         let cell: Cell
         if (columnIndex === 0) {
           cell = new Cell(rowIndex, columnIndex, undefined, theFourAces)
-        }
-        else {
+        } else {
           const cellToTheLeft = this.cells[this.cells.length - 1]
           cell = new Cell(rowIndex, columnIndex, cellToTheLeft, theFourAces)
         }
@@ -173,8 +184,7 @@ export class Game {
     this.cellsWithIncorrectlyPlacedCards.forEach(cell => {
       if (cell.columnIndex === Settings.instance.columns - 1) {
         cell.card = undefined
-      }
-      else {
+      } else {
         cell.card = cardsInWrongPlace.shift()
         // TODO: Clean the code to remove these checks.
         if (cell.card === undefined) {
@@ -188,8 +198,7 @@ export class Game {
 
     if (this.gameStatus === GameStatus.GameWon) {
       this.storeSummaryIfGameOver()
-    }
-    else {
+    } else {
       this.gameSummary.addStep({
         cardsInPlace: this.correctlyPlacedCards,
         moves: this.moves
@@ -201,13 +210,20 @@ export class Game {
     ArrayUtilities.shuffleArray(this.deck)
 
     for (let rowIndex = 0; rowIndex < Settings.instance.rows; rowIndex++) {
-      for (let columnIndex = 0; columnIndex < Settings.instance.columns; columnIndex++) {
-        const cell = this.cells[rowIndex * Settings.instance.columns + columnIndex]
+      for (
+        let columnIndex = 0;
+        columnIndex < Settings.instance.columns;
+        columnIndex++
+      ) {
+        const cell = this.cells[
+          rowIndex * Settings.instance.columns + columnIndex
+        ]
         if (columnIndex === 0) {
           cell.card = undefined
-        }
-        else {
-          cell.card = this.deck[rowIndex * (Settings.instance.columns - 1) + (columnIndex - 1)]
+        } else {
+          cell.card = this.deck[
+            rowIndex * (Settings.instance.columns - 1) + (columnIndex - 1)
+          ]
           cell.card.cell = cell
         }
       }
@@ -219,11 +235,17 @@ export class Game {
   }
 
   private storeGameSummary() {
-    firebase.database().ref('gameSummaries').push(this.gameSummary)
+    firebase
+      .database()
+      .ref('gameSummaries')
+      .push(this.gameSummary)
   }
 
   private storeSummaryIfGameOver() {
-    if (this.gameStatus === GameStatus.GameLost || this.gameStatus === GameStatus.GameWon) {
+    if (
+      this.gameStatus === GameStatus.GameLost ||
+      this.gameStatus === GameStatus.GameWon
+    ) {
       this.gameSummary.addFinalStep({
         cardsInPlace: this.correctlyPlacedCards,
         moves: this.moves

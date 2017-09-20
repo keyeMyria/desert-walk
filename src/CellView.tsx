@@ -29,8 +29,7 @@ export class CellView extends Component<Props, {}> {
           status={this.getEmptyCellStatus()}
         />
       )
-    }
-    else {
+    } else {
       // Necessary to satisfy the TypeScript compiler in the onCardMoved line below.
       const definedCard = this.props.cell.card
 
@@ -41,8 +40,10 @@ export class CellView extends Component<Props, {}> {
           draggable={this.props.draggable}
           correctlyPlaced={this.props.cell.cardIsCorrectlyPlaced}
           key={this.props.cell.key}
-          onCardDropped={cardRectangle => this.props.onCardDropped(this.props.cell, cardRectangle)}
-          onCardMoved={cardRectangle => this.props.onCardMoved(definedCard, cardRectangle)}
+          onCardDropped={cardRectangle =>
+            this.props.onCardDropped(this.props.cell, cardRectangle)}
+          onCardMoved={cardRectangle =>
+            this.props.onCardMoved(definedCard, cardRectangle)}
           onDragStarted={card => this.props.onDragStarted(card)}
         />
       )
@@ -62,7 +63,11 @@ export class CellView extends Component<Props, {}> {
       return EmptyCellStatus.HoveredByDropableCard
     }
 
-    if (this.props.cell.droppableCards.some(card => card === this.props.draggedCard)) {
+    if (
+      this.props.cell.droppableCards.some(
+        card => card === this.props.draggedCard
+      )
+    ) {
       return EmptyCellStatus.CurrentlyDraggedCardDroppable
     }
 

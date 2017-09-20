@@ -32,8 +32,9 @@ export class Cell {
       return aceInFirstColumn
     }
 
-    const followsCardToTheLeft = this.cellToTheLeft.cardIsCorrectlyPlaced
-      && (this.cellToTheLeft.card as Card).next === this.card
+    const followsCardToTheLeft =
+      this.cellToTheLeft.cardIsCorrectlyPlaced &&
+      (this.cellToTheLeft.card as Card).next === this.card
 
     return followsCardToTheLeft
   }
@@ -73,15 +74,21 @@ export class Cell {
       return false
     }
 
-    const hoveredByDroppableCard = this.droppableCards.includes(this.hoveredByCard)
+    const hoveredByDroppableCard = this.droppableCards.includes(
+      this.hoveredByCard
+    )
     return hoveredByDroppableCard
   }
 
   @computed
   public get position(): Point {
     const position = {
-      x: this.columnIndex * (Settings.instance.cardSize.width + Settings.instance.gutterWidth),
-      y: this.rowIndex * (Settings.instance.cardSize.height + Settings.instance.gutterWidth)
+      x:
+        this.columnIndex *
+        (Settings.instance.cardSize.width + Settings.instance.gutterWidth),
+      y:
+        this.rowIndex *
+        (Settings.instance.cardSize.height + Settings.instance.gutterWidth)
     }
 
     return position

@@ -4,7 +4,7 @@ import { observable } from 'mobx'
 import { Size } from './Size'
 
 export class Settings {
-  private constructor() { }
+  private constructor() {}
 
   @observable public availableWidth = 0
   public readonly maxCardValue = 13
@@ -74,11 +74,9 @@ export class Settings {
   @computed
   public get cardSize(): Size {
     const cardWidth = Math.floor(
-      (
-        this.availableWidth * this.cardWidthToGutterRatio
-      ) / (
-        this.columns * (this.cardWidthToGutterRatio + 1) + 1
-      )
+      this.availableWidth *
+        this.cardWidthToGutterRatio /
+        (this.columns * (this.cardWidthToGutterRatio + 1) + 1)
     )
 
     const cardHeight = Math.floor(this.cardSizeRatio * cardWidth)
@@ -133,8 +131,10 @@ export class Settings {
 
   @computed
   public get gridSize(): Size {
-    const width = this.cardSize.width * this.columns + this.gutterWidth * (this.columns - 1)
-    const height = this.cardSize.height * this.rows + this.gutterWidth * (this.rows - 1)
+    const width =
+      this.cardSize.width * this.columns + this.gutterWidth * (this.columns - 1)
+    const height =
+      this.cardSize.height * this.rows + this.gutterWidth * (this.rows - 1)
 
     return {
       height: height,
@@ -145,9 +145,7 @@ export class Settings {
   @computed
   public get gutterWidth(): number {
     const gutterWidth = Math.floor(
-      (
-        this.availableWidth - this.columns * this.cardSize.width
-      ) / this.columns
+      (this.availableWidth - this.columns * this.cardSize.width) / this.columns
     )
 
     return gutterWidth

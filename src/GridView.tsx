@@ -37,20 +37,22 @@ export class GridView extends Component<Props, State> {
     }
 
     return (
-      <View
-        style={gridViewStyle}
-      >
-        {this.props.grid.cells.map(cell =>
+      <View style={gridViewStyle}>
+        {this.props.grid.cells.map(cell => (
           <CellView
             cell={cell}
             draggedCard={this.state.draggedCard}
-            draggable={this.props.grid.draggableCards.some(card => cell.card === card)}
+            draggable={this.props.grid.draggableCards.some(
+              card => cell.card === card
+            )}
             key={cell.key}
-            onCardDropped={(fromCell, cardRectangle) => this.handleCardDropped(fromCell, cardRectangle)}
-            onCardMoved={(card, cardRectangle) => this.handleCardMoved(card, cardRectangle)}
+            onCardDropped={(fromCell, cardRectangle) =>
+              this.handleCardDropped(fromCell, cardRectangle)}
+            onCardMoved={(card, cardRectangle) =>
+              this.handleCardMoved(card, cardRectangle)}
             onDragStarted={card => this.handleDragStarted(card)}
           />
-        )}
+        ))}
       </View>
     )
   }
@@ -61,7 +63,9 @@ export class GridView extends Component<Props, State> {
     }
 
     const overlappingEmptyCells = this.props.grid.emptyCells
-      .filter(cell => this.props.grid.cardIsDroppable(this.state.draggedCard as Card, cell))
+      .filter(cell =>
+        this.props.grid.cardIsDroppable(this.state.draggedCard as Card, cell)
+      )
       .map(cell => {
         return {
           cell: cell,
@@ -69,7 +73,10 @@ export class GridView extends Component<Props, State> {
         }
       })
       .filter(cellAndOverlap => cellAndOverlap.overlappingPixels > 0)
-      .sort((cellAndOverlap1, cellAndOverlap2) => cellAndOverlap2.overlappingPixels - cellAndOverlap1.overlappingPixels)
+      .sort(
+        (cellAndOverlap1, cellAndOverlap2) =>
+          cellAndOverlap2.overlappingPixels - cellAndOverlap1.overlappingPixels
+      )
 
     if (overlappingEmptyCells.length > 0) {
       const to = overlappingEmptyCells[0].cell
@@ -92,16 +99,18 @@ export class GridView extends Component<Props, State> {
         }
       })
       .filter(cellAndOverlap => cellAndOverlap.overlappingPixels > 0)
-      .sort((cellAndOverlap1, cellAndOverlap2) => cellAndOverlap2.overlappingPixels - cellAndOverlap1.overlappingPixels)
+      .sort(
+        (cellAndOverlap1, cellAndOverlap2) =>
+          cellAndOverlap2.overlappingPixels - cellAndOverlap1.overlappingPixels
+      )
 
     this.props.grid.emptyCells.forEach(cell => {
       if (overlappingEmptyCells.length === 0) {
         cell.hoveredByCard = undefined
-      }
-      else {
+      } else {
         cell === overlappingEmptyCells[0].cell
-          ? cell.hoveredByCard = card
-          : cell.hoveredByCard = undefined
+          ? (cell.hoveredByCard = card)
+          : (cell.hoveredByCard = undefined)
       }
     })
   }

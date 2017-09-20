@@ -49,17 +49,14 @@ export class DraggableCard extends Component<Props, State> {
           visualState: VisualState.Animating
         })
 
-        Animated.timing(
-          this.animatedPosition,
-          {
-            duration: 200,
-            easing: Easing.elastic(1),
-            toValue: {
-              x: 0,
-              y: 0
-            }
+        Animated.timing(this.animatedPosition, {
+          duration: 200,
+          easing: Easing.elastic(1),
+          toValue: {
+            x: 0,
+            y: 0
           }
-        ).start(() => {
+        }).start(() => {
           if (this.state.visualState !== VisualState.Dragging) {
             this.setState({
               visualState: VisualState.Idle
@@ -70,15 +67,14 @@ export class DraggableCard extends Component<Props, State> {
       onPanResponderGrant: (e, gestureState) => {
         this.props.onDragStarted(this.props.card)
       },
-      onPanResponderMove:
-        Animated.event([
-          // tslint:disable-next-line:no-null-keyword
-          null as any,
-          {
-            dx: this.animatedPosition.x,
-            dy: this.animatedPosition.y
-          }
-        ]),
+      onPanResponderMove: Animated.event([
+        // tslint:disable-next-line:no-null-keyword
+        null as any,
+        {
+          dx: this.animatedPosition.x,
+          dy: this.animatedPosition.y
+        }
+      ]),
       onPanResponderStart: (e, gestureState) => {
         this.setState({
           visualState: VisualState.Dragging
@@ -111,10 +107,7 @@ export class DraggableCard extends Component<Props, State> {
       : undefined
 
     return (
-      <Animated.View
-        style={style}
-        {...panHandlers}
-      >
+      <Animated.View style={style} {...panHandlers}>
         <CardView
           card={this.props.card}
           draggable={this.props.draggable}

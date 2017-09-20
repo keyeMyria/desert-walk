@@ -8,10 +8,7 @@ import { Settings } from './Settings'
 import { Suit } from './Suit'
 
 export class Card {
-  constructor(
-    public readonly suit: Suit,
-    public readonly value: number
-  ) { }
+  constructor(public readonly suit: Suit, public readonly value: number) {}
 
   @observable public cell: Cell | undefined
   public next: Card | undefined

@@ -81,14 +81,10 @@ export class CardView extends Component<Props, {}> {
     return (
       <View style={shadowStyle}>
         <View style={cardStyle}>
-          <Text style={valueStyle}>
-            {this.props.card.displayValue}
-          </Text>
-          <View style={suitStyle}>
-            {this.suit()}
-          </View>
+          <Text style={valueStyle}>{this.props.card.displayValue}</Text>
+          <View style={suitStyle}>{this.suit()}</View>
         </View>
-        <View style={overlayStyle}/>
+        <View style={overlayStyle} />
       </View>
     )
   }
@@ -98,24 +94,16 @@ export class CardView extends Component<Props, {}> {
 
     switch (this.props.card.suit) {
       case Suit.Clubs:
-        return (
-          <Club size={size}/>
-        )
+        return <Club size={size} />
 
       case Suit.Diamonds:
-        return (
-          <Diamond size={size}/>
-        )
+        return <Diamond size={size} />
 
       case Suit.Hearts:
-        return (
-          <Heart size={size}/>
-        )
+        return <Heart size={size} />
 
       case Suit.Spades:
-        return (
-          <Spade size={size}/>
-        )
+        return <Spade size={size} />
     }
   }
 

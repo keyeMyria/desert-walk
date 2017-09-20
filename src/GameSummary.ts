@@ -1,5 +1,5 @@
 interface GameSummaryStep {
-  cardsInPlace: number,
+  cardsInPlace: number
   moves: number
 }
 

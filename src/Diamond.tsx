@@ -12,11 +12,7 @@ interface Props {
 export class Diamond extends Component<Props, {}> {
   public render() {
     return (
-      <Svg
-        height={this.props.size}
-        viewBox="0 0 60 60"
-        width={this.props.size}
-      >
+      <Svg height={this.props.size} viewBox="0 0 60 60" width={this.props.size}>
         <Svg.G>
           <Svg.Path
             d="M30.005,-0 L7.244,29.589 L30.005,60 L52.766,29.589 z"
