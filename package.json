@@ -10,7 +10,7 @@
   "license": "MIT",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "prettier": "prettier --write --print-width 100 --tab-width 2 --no-semi \"**/*.tsx\" \"**/*.ts\""
+    "prettier": "prettier --write \"**/*.tsx\" \"**/*.ts\""
   },
   "jest": {
     "preset": "jest-expo-ts"
