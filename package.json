@@ -28,6 +28,7 @@
     "prop-types": "15.5.10",
     "react-native-typescript-transformer": "1.1.4",
     "tslint": "5.7.0",
+    "tslint-config-prettier": "1.5.0",
     "tslint-eslint-rules": "4.1.1",
     "tslint-react": "3.2.0",
     "typescript": "2.5.2"
